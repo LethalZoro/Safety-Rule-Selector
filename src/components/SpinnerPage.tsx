@@ -1,16 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SimpleSpinner from './SimpleSpinner';
 import Timer from './Timer';
 import SafetyRuleCard from './SafetyRuleCard';
 import { safetyRules } from '../data/safetyRules';
 import { Play, RefreshCw } from 'lucide-react';
 
-const SpinnerPage: React.FC = () => {
+interface SpinnerPageProps {
+  timerDuration: number;
+}
+
+const SpinnerPage: React.FC<SpinnerPageProps> = ({ timerDuration }) => {
   const [isSpinning, setIsSpinning] = useState(false);
   const [selectedRuleIndex, setSelectedRuleIndex] = useState<number | null>(null);
   const [isTimerActive, setIsTimerActive] = useState(false);
   const [gamePhase, setGamePhase] = useState<'idle' | 'spinning' | 'selected' | 'discussion' | 'complete'>('idle');
   const [usedRules, setUsedRules] = useState<number[]>([]);
+
+  // Auto-scroll to bottom when timer starts and when timer ends
+  useEffect(() => {
+    if (isTimerActive || gamePhase === 'complete') {
+      setTimeout(() => {
+        window.scrollTo({
+          top: document.documentElement.scrollHeight,
+          behavior: 'smooth'
+        });
+      }, 500); // Small delay to ensure the content is rendered
+    }
+  }, [isTimerActive, gamePhase]);
 
   const handleStartSpin = () => {
     if (usedRules.length >= safetyRules.length) {
@@ -56,7 +72,7 @@ const SpinnerPage: React.FC = () => {
           <Timer
             isActive={isTimerActive}
             onComplete={handleTimerComplete}
-            duration={300} // 5 minutes
+            duration={timerDuration}
           />
         </div>
       )}

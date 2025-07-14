@@ -6,6 +6,7 @@ import RulesPage from './components/RulesPage';
 
 function App() {
   const [activeTab, setActiveTab] = useState<'spinner' | 'rules'>('spinner');
+  const [timerDuration, setTimerDuration] = useState(300); // Default 5 minutes
 
   return (
     <div className="min-h-screen relative">
@@ -23,11 +24,11 @@ function App() {
       
       {/* Main Content with Glass Effect */}
       <div className="relative z-10 min-h-screen">
-        <Header />
+        <Header duration={timerDuration} onDurationChange={setTimerDuration} />
         <TabNavigation activeTab={activeTab} onTabChange={setActiveTab} />
         
         <main className="relative">
-          {activeTab === 'spinner' ? <SpinnerPage /> : <RulesPage />}
+          {activeTab === 'spinner' ? <SpinnerPage timerDuration={timerDuration} /> : <RulesPage />}
         </main>
       </div>
       
