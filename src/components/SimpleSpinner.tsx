@@ -43,36 +43,36 @@ const SimpleSpinner: React.FC<SimpleSpinnerProps> = ({
 
   return (
     <div className="flex flex-col items-center">
-      <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl p-12 border-4 border-slate-300">
+      <div className="glass-dark text-white rounded-2xl shadow-2xl p-12 border border-cyan-400/30 hover-lift animate-fade-in-scale">
         <div className="text-center">
           <div className="flex items-center justify-center mb-6">
-            <Target className="w-8 h-8 text-cyan-600 mr-3" />
-            <h3 className="text-2xl font-bold text-slate-800">Safety Rule Selector</h3>
+            <Target className="w-8 h-8 text-cyan-400 mr-3" />
+            <h3 className="text-2xl font-bold bg-gradient-to-r from-cyan-300 to-blue-300 bg-clip-text text-transparent">Safety Rule Selector</h3>
           </div>
           
           <div className="relative">
-            <div className={`text-8xl font-bold text-blue-600 transition-all duration-150 ${
-              isSpinning ? 'animate-pulse scale-110 text-cyan-500' : 'scale-100 text-teal-600'
+            <div className={`text-8xl font-bold transition-all duration-150 ${
+              isSpinning ? 'animate-pulse scale-110 text-cyan-400' : 'scale-100 text-cyan-300'
             }`}>
               {currentNumber}
             </div>
             
             {isSpinning && (
               <div className="absolute -top-4 -right-4">
-                <Zap className="w-8 h-8 text-amber-500 animate-bounce" />
+                <Zap className="w-8 h-8 text-amber-400 animate-bounce" />
               </div>
             )}
           </div>
           
-          <div className="mt-6 text-lg text-slate-600">
+          <div className="mt-6 text-lg text-slate-300">
             {isSpinning ? 'Selecting safety rule...' : `Rule ${currentNumber} selected`}
           </div>
           
           {isSpinning && (
             <div className="mt-4">
-              <div className="text-sm text-slate-500 mb-2">Spinning... ({spinCount})</div>
-              <div className="w-64 h-2 bg-slate-200 rounded-full overflow-hidden">
-                <div className="h-full bg-gradient-to-r from-cyan-500 to-teal-500 animate-pulse" />
+              <div className="text-sm text-slate-400 mb-2">Spinning... ({spinCount})</div>
+              <div className="w-64 h-2 glass rounded-full overflow-hidden">
+                <div className="h-full bg-gradient-to-r from-cyan-400 to-blue-400 animate-pulse-glow" />
               </div>
             </div>
           )}
@@ -80,7 +80,7 @@ const SimpleSpinner: React.FC<SimpleSpinnerProps> = ({
       </div>
       
       <div className="mt-6 text-center max-w-md">
-        <div className="text-sm text-gray-600">
+        <div className="text-sm text-slate-300">
           {isSpinning ? 'Randomly selecting from safety rules...' : 'Timer will start automatically'}
         </div>
       </div>
